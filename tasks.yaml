@@ -1,0 +1,71 @@
+includes:
+  - cleanup: ./tasks/cleanup.yaml
+  - dependencies: ./tasks/dependencies.yaml
+  - test: ./tasks/test.yaml
+  - create: https://raw.githubusercontent.com/defenseunicorns/uds-common/v0.6.1/tasks/create.yaml
+  - lint: https://raw.githubusercontent.com/defenseunicorns/uds-common/v0.6.1/tasks/lint.yaml
+  - pull: https://raw.githubusercontent.com/defenseunicorns/uds-common/v0.6.1/tasks/pull.yaml
+  - deploy: https://raw.githubusercontent.com/defenseunicorns/uds-common/v0.6.1/tasks/deploy.yaml
+  - setup: https://raw.githubusercontent.com/defenseunicorns/uds-common/v0.6.1/tasks/setup.yaml
+
+tasks:
+  - name: default
+    description: Create K3D Cluster with UDS-Core + Trust Manager
+    actions:
+      - task: create-trust-manager-test-bundle
+      - task: setup:k3d-test-cluster
+      - task: deploy:test-bundle
+
+  - name: create-trust-manager-package
+    description: Create UDS Trust Manager Package, No dependencies included
+    actions:
+      - task: create:package
+        with:
+          options: "--skip-sbom"
+
+  - name: create-trust-manager-test-bundle
+    description: Create a local UDS Trust Manager bundle with dependencies
+    actions:
+      - task: create-trust-manager-package
+      - task: dependencies:create
+      - task: create:test-bundle
+
+  - name: create-trust-manager-latest-release-bundle
+    description: Create UDS Trust Manager bundle with dependencies based on the latest release
+    actions:
+      - task: pull:latest-package-release
+        with:
+          spoof_release: "true"
+      - task: dependencies:create
+      - task: create:test-bundle
+
+  - name: dev
+    description: deploy against running cluster
+    actions:
+      - task: create-trust-manager-test-bundle
+      - task: deploy:test-bundle
+
+# CI will execute the following (via uds-common/.github/actions/test) so they need to be here with these names
+
+  - name: test-package
+    description: Test the Trust Manager package from the current branch
+    actions:
+      - task: create-trust-manager-test-bundle
+      - task: setup:k3d-test-cluster
+      - task: deploy:test-bundle
+      - task: test:all
+
+  - name: test-upgrade
+    description: Test an upgrade from the latest released package to the current branch
+    actions:
+      - task: create-trust-manager-latest-release-bundle
+      - task: setup:k3d-test-cluster
+      - task: deploy:test-bundle
+      - task: create-trust-manager-test-bundle
+      - task: deploy:test-bundle
+      - task: test:all
+
+  - name: cleanup-cluster
+    description: Destroy k3d cluster
+    actions:
+      - task: cleanup:cluster

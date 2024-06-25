@@ -1,0 +1,23 @@
+kind: UDSBundle
+metadata:
+  name: trust-manager-test
+  description: A UDS bundle for deploying Trust Manager and its dependencies on a development cluster
+  # x-release-please-start-version
+  version: 0.11.0-uds.0
+  # x-release-please-end
+
+packages:
+  - name: dev-namespace
+    path: ../
+    ref: 0.1.0
+
+  # Trust manager has a dependency on CRDs created by cert-manager
+  - name: cert-manager
+    repository: ghcr.io/defenseunicorns/packages/uds/cert-manager
+    ref: 0.1.3-upstream
+
+  - name: trust-manager
+    path: ../
+    # x-release-please-start-version
+    ref: 0.11.0-uds.0
+    # x-release-please-end

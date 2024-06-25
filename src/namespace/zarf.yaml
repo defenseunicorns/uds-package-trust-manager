@@ -1,0 +1,13 @@
+kind: ZarfPackageConfig
+metadata:
+  name: dev-namespace
+  description: "Create namespace for trust manager"
+  version: 0.1.0
+
+components:
+  - name: deploy-namespace-for-cross-ns-secret
+    required: true
+    manifests:
+      - name: dev-namespace
+        files:
+          - trust-manager-ns.yaml

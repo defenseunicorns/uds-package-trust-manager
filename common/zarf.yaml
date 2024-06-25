@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: trust-manager-common
+  description: "UDS Trust Manager Common Package"
+
+components:
+  - name: trust-manager
+    required: true
+    charts:
+      - name: uds-trust-manager-config
+        namespace: cert-manager
+        version: 0.1.0
+        localPath: ../chart
+      - name: trust-manager
+        namespace: cert-manager
+        url: https://charts.jetstack.io/
+        gitPath: chart
+        version: 0.11.0
+        valuesFiles:
+          - ../values/common-values.yaml
+    actions:
+      onDeploy:
+        after:
+          - description: Validate Trust Manager Package
+            maxTotalSeconds: 300
+            wait:
+              cluster:
+                kind: Packages
+                name: trust-manager
+                namespace: cert-manager
+                condition: "'{.status.phase}'=Ready"

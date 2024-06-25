@@ -1,1 +1,1 @@
-# uds-package-trustmanager
+# uds-package-trust-manager

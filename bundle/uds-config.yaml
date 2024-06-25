@@ -1,0 +1,5 @@
+variables:
+  cert-manager:
+    CONFIGURE_FOR_ISTIO: true
+  trust-manager:
+    CONFIGURE_FOR_ISTIO: true
