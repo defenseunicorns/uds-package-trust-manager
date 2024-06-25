@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: trust-manager
+  description: "UDS Trust Manager package"
+  # x-release-please-start-version
+  version: "0.11.0-uds.0"
+  # x-release-please-start-version
+  architecture: amd64
+
+variables:
+  - name: CONFIGURE_FOR_ISTIO
+    default: "false"
+
+components:
+  - name: trust-manager
+    required: true
+    description: "Deploy trust-manager"
+    import:
+      path: common
+    only:
+      flavor: upstream
+    charts:
+      - name: trust-manager
+        valuesFiles:
+          - values/upstream-values.yaml
+    images:
+      - quay.io/jetstack/trust-manager:v0.11.0
+      - quay.io/jetstack/cert-manager-package-debian:20210119.0
