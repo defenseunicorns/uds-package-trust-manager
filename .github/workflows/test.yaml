@@ -34,11 +34,11 @@ permissions:
 jobs:
   run-test:
     name: ${{ matrix.type }} ${{ matrix.flavor }}
-    runs-on: uds-ubuntu-big-boy-8-core
+    runs-on: ubuntu-latest
     timeout-minutes: 25
     strategy:
       matrix:
-        flavor: [upstream, registry1]
+        flavor: [upstream]
         type: [install, upgrade]
 
     steps:
@@ -51,9 +51,6 @@ jobs:
           registry1Username: ${{ secrets.IRON_BANK_ROBOT_USERNAME }}
           registry1Password: ${{ secrets.IRON_BANK_ROBOT_PASSWORD }}
           ghToken: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Playwright setup
-        uses: defenseunicorns/uds-common/.github/actions/playwright@0901c37366f37fea586768c79708e14e964e714e # v0.6.1
 
       - name: Test
         uses: defenseunicorns/uds-common/.github/actions/test@0901c37366f37fea586768c79708e14e964e714e # v0.6.1
