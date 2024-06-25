@@ -1,5 +1,5 @@
 apiVersion: v2
-name: uds-trust-maanger-config
+name: uds-trust-manager-config
 description: uds-trust-manager-config
 
 # A chart can be either an 'application' or a 'library' chart.
