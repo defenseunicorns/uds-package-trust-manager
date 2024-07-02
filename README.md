@@ -20,6 +20,8 @@ Trust Manager depends on resources deployed as part of Cert Manager so that must
 | ------ | ----------- | ---------------- |
 | `upstream` | Uses upstream images within the package. | `zarf package create . -f upstream` |
 
+Currently Ironbank only has images for cert-manager, not trust-manager, so no registry1 flavor is available.
+
 ## Releases
 
 The released packages can be found in [ghcr](https://github.com/defenseunicorns/uds-package-trust-manager/pkgs/container/packages%2Fuds%2Ftrust-manager).
