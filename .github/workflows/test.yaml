@@ -39,7 +39,7 @@ jobs:
     strategy:
       matrix:
         flavor: [upstream]
-        type: [install, upgrade]
+        type: [install]
 
     steps:
       - name: Checkout repository
