@@ -18,7 +18,9 @@ Trust Manager depends on resources deployed as part of Cert Manager so that must
 
 | Flavor | Description | Example Creation |
 | ------ | ----------- | ---------------- |
-| upstream | Uses upstream images within the package. | `zarf package create . -f upstream` |
+| `upstream` | Uses upstream images within the package. | `zarf package create . -f upstream` |
+
+Currently Ironbank only has images for cert-manager, not trust-manager, so no registry1 flavor is available.
 
 ## Releases
 

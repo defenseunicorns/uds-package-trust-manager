@@ -8,6 +8,7 @@ metadata:
   # x-release-please-start-version
   architecture: amd64
 
+# Make sure tests work
 variables:
   - name: CONFIGURE_FOR_ISTIO
     default: "false"
