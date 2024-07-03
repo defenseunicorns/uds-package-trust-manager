@@ -1,4 +1,4 @@
-# 🏭 UDS Package Trust Manager
+# UDS Package Trust Manager
 
 [![Latest Release](https://img.shields.io/github/v/release/defenseunicorns/uds-package-trust-manager)](https://github.com/defenseunicorns/uds-package-trust-manager/releases)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/defenseunicorns/uds-package-trust-manager/tag-and-release.yaml)](https://github.com/defenseunicorns/uds-package-trust-manager/actions/workflows/tag-and-release.yaml)
