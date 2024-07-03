@@ -5,10 +5,9 @@ metadata:
   description: "UDS Trust Manager package"
   # x-release-please-start-version
   version: "0.11.0-uds.0"
-  # x-release-please-start-version
+  # x-release-please-end
   architecture: amd64
 
-# Make sure tests work
 variables:
   - name: CONFIGURE_FOR_ISTIO
     default: "false"
